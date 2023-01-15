@@ -63,7 +63,7 @@ def display_contact(contacts):
 
 def select_contact(contacts, period):
     """
-    Выбрать маршрут
+    Выбрать контакт
     """
     result = []
     for contact in contacts:
@@ -100,7 +100,9 @@ def main(command_line=None):
         help="The data file name"
     )
 
-    # Создать основной парсер командной строки.
+    """
+    Создать основной парсер командной строки.
+    """
     parser = argparse.ArgumentParser("contacts")
     parser.add_argument(
         "--version",
@@ -110,7 +112,9 @@ def main(command_line=None):
 
     subparsers = parser.add_subparsers(dest="command")
 
-    #Создать субпарсер для добавления работника.
+    """
+    Создать субпарсер для добавления контакта.
+    """
     add = subparsers.add_parser(
         "add",
         parents=[file_parser],
@@ -151,7 +155,9 @@ def main(command_line=None):
         parents=[file_parser],
         help="Display all contacts"
     )
-    # Создать субпарсер для выбора работников.
+    """
+    Создать субпарсер для выбора контакта.
+    """
     select = subparsers.add_parser(
         "select",
         parents=[file_parser],
@@ -164,17 +170,23 @@ def main(command_line=None):
         help="The required family"
     )
 
-    # Выполнить разбор аргументов командной строки.
+    """
+    Выполнить разбор аргументов командной строки.
+    """
     args = parser.parse_args(command_line)
 
-    # Загрузить все контакты в файл, если файл существует.
+    """
+    Загрузить все контакты в файл, если файл существует.
+    """
     is_dirty = False
     if os.path.exists(args.filename):
         contacts = load_contacts(args.filename)
     else:
         contacts = []
 
-    # Добавить работника
+    """
+    Добавить контакт
+    """
     if args.command == "add":
         contacts = add_contact(
             contacts,
@@ -201,4 +213,3 @@ def main(command_line=None):
 
 if __name__ == "__main__":
     main()
-

@@ -11,6 +11,11 @@ def cl():
     pass
 
 
+"""
+Добавить команды
+"""
+
+
 @cl.command()
 @click.argument("contacts")
 @click.option("-f", "--family")
@@ -31,7 +36,7 @@ def add_contact(contacts, family, name, number, born):
     )
     with open(contacts, "w", encoding="utf-8") as file_out:
         json.dump(contacts, file_out, ensure_ascii=False, indent=4)
-    click.secho("Маршрут добавлен", fg='orange')
+    click.secho("Контакт добавлен", fg='orange')
 
 
 @cl.command()
@@ -80,7 +85,7 @@ def display_contact(contacts):
 @click.option("-s", "--select")
 def select_contact(contacts, period):
     """
-    Выбрать маршрут
+    Выбрать контакт
     """
     result = []
     for contact in contacts:
